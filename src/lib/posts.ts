@@ -19,12 +19,24 @@ export interface PostData extends PostMeta {
   contentHtml: string;
 }
 
+function normalizeDate(value: unknown): string {
+  if (typeof value === 'string') {
+    return value;
+  }
+
+  if (value instanceof Date && !Number.isNaN(value.getTime())) {
+    return value.toISOString().slice(0, 10);
+  }
+
+  return '1970-01-01';
+}
+
 function normalizeMeta(slug: string, data: Record<string, unknown>): PostMeta {
   return {
     slug,
     title: typeof data.title === 'string' ? data.title : slug,
     excerpt: typeof data.excerpt === 'string' ? data.excerpt : '',
-    date: typeof data.date === 'string' ? data.date : '1970-01-01',
+    date: normalizeDate(data.date),
     author: typeof data.author === 'string' ? data.author : 'Harbor Smile Team',
   };
 }
