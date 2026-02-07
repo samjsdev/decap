@@ -2,18 +2,11 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
+import { formatPublishedDate } from '@/lib/date';
 import { getAllPostsMeta, getPostBySlug, getPostSlugs } from '@/lib/posts';
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
-}
-
-function formatDate(dateString: string): string {
-  return new Intl.DateTimeFormat('en-US', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-  }).format(new Date(dateString));
 }
 
 export async function generateStaticParams() {
@@ -58,7 +51,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         Back to Journal
       </Link>
       <p className="meta">
-        {formatDate(post.date)} • {post.author}
+        {formatPublishedDate(post.date)} • {post.author}
       </p>
       <h1>{post.title}</h1>
       <p className="lead">{post.excerpt}</p>
@@ -73,7 +66,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <div className="blog-grid">
             {morePosts.map((item) => (
               <article key={item.slug} className="blog-card">
-                <p className="meta">{formatDate(item.date)}</p>
+                <p className="meta">{formatPublishedDate(item.date)}</p>
                 <h3>
                   <Link href={`/blog/${item.slug}`}>{item.title}</Link>
                 </h3>

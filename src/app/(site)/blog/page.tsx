@@ -1,15 +1,8 @@
 import Link from 'next/link';
 
 import { PageIntro } from '@/components/PageIntro';
+import { formatPublishedDate } from '@/lib/date';
 import { getAllPostsMeta } from '@/lib/posts';
-
-function formatDate(dateString: string): string {
-  return new Intl.DateTimeFormat('en-US', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-  }).format(new Date(dateString));
-}
 
 export default function BlogPage() {
   const posts = getAllPostsMeta();
@@ -26,7 +19,7 @@ export default function BlogPage() {
         {posts.map((post) => (
           <article key={post.slug} className="blog-card">
             <p className="meta">
-              {formatDate(post.date)} • {post.author}
+              {formatPublishedDate(post.date)} • {post.author}
             </p>
             <h2>
               <Link href={`/blog/${post.slug}`}>{post.title}</Link>
