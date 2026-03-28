@@ -2,8 +2,12 @@ backend:
   name: github
   repo: samjsdev/decap
   branch: main
+  # This tells Decap CMS where your OAuth proxy (Cloudflare Pages Function) lives
+  base_url: https://decap-b03.pages.dev
 
-local_backend: true
+# IMPORTANT: Keep this commented out for production. 
+# Only uncomment this line when you are testing locally with 'npx decap-server'
+# local_backend: true
 
 media_folder: "public/uploads"
 public_folder: "/uploads"
