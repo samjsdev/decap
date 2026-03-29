@@ -27,4 +27,4 @@ Contact us today to book your next appointment!
 
 ![](/uploads/0_family_family_time_1280x720-1.png)
 
-![](/uploads/0_family_family_time_1280x720-1.png)
+![](/uploads/6.webp)
